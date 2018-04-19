@@ -7,6 +7,17 @@ Before digging into the installation steps, you should consider the main require
 * You need to have a development machine configured to create SharePoint Framework solutions (see the following steps)
 * You need to install the PowerShell extensions for SharePoint Online
 * You need to install the PnP PowerShell extensions
+* You need version Python 2.7 
+* You need Node version 8.9.4
+* You need Npm 5.71
+* You need Node-sass 4.7.2
+* You need Libsas 3.5.0
+* You need visual studio C++ Redist 2015 
+
+PRE-REQUISITE
+Python version 2.7.x is required for building the SPFx. Install to C:\python27
+python download is available here
+https://www.python.org/downloads/windows/
 
 Aside from the Office 365 subscription, you will find further details about the other requirements in the following installation steps.
 
@@ -34,6 +45,40 @@ The Office 365 Group, together with its Modern Site, will be created in a matter
 
 ## Prepare the Development Environment
 In order to install the GDPR Activity Hub, eventually customizing the solution and hosting it in your own hosting environment, you will need a development machine ready to build SharePoint Framework (SPFx) solutions. You can find detailed and updated instructions about how to setup up an SPFx development machine in the document ["Set up your SharePoint client-side web part development environment"](https://dev.office.com/sharepoint/docs/spfx/set-up-your-development-environment)
+
+## Node 8 should be LTS Version
+> If you are seeing the error: "Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (57)"
+Update node-sass to v4.5 or downgrade node to v6. There was never support for Node 8 in anything but release 4.5.3. This is due to the build in the SharePoint Client Side pre-requisites and the issues with Node Version and Node-Sass compatibility - trying to figure this out took a while. Basically the following versions install by default which are not compatible:
+Node version: v8.9.4
+Node-sass version: 3.13.1
+
+> There's also an issue with Node-sass with having different versions in different locations so you need to check your install path "C:\Program Files\nodejs" and "C:\Windows\System32"
+compatibility version information can be found here https://github.com/sass/node-sass/releases
+
+For the solution to work upgrade Node, Npm, Node-sass, Libsas;
+* Node version 8.9.4
+* Npm 5.71
+* Node-sass 4.7.2
+* Libsas 3.5.0
+
+some commands to check versions:
+* node -p "require('node-sass').info"
+* npm ls node-sass
+
+check to see if updates required:
+* Npm outdated
+* Npm update
+* Npm install node-sass
+
+## Visual studio C++ Redist 2015
+
+open up a new cmd as administrator and run this command:
+* npm install --global --production windows-build-tools
+then
+* npm config set msvs_version 2015 --global
+close all instances of shell, reopen powershell 
+
+## Download the Source Code
 
 Now, pull the source code of the project either using [this repository](https://github.com/SharePoint/sp-dev-gdpr-activity-hub) and a GIT client, or simply download [a ZIP file](https://github.com/SharePoint/sp-dev-gdpr-activity-hub/archive/master.zip) with the source code of the solution.
 
